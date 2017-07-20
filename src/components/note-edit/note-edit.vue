@@ -6,33 +6,44 @@
         <input class="title" v-model="title" type="text" placeholder="请输入标题">
         <textarea class="content" v-model="content" placeholder="请输入内容"></textarea>
       </div>
+      <confirm :tip="tip" ref="confirm"></confirm>
     </div>
   </transition>
 </template>
 
 <script type="text/ecmascript-6">
   import THeader from 'components/theader/theader'
+  import Confirm from 'components/confirm/confirm'
   import {mapActions} from 'vuex'
 
   export default {
     data() {
       return {
         title: '',
-        content: ''
+        content: '',
+        tip: '内容不能为空'
       }
     },
     created() {
       this.hasBack = true
     },
     components: {
-      THeader
+      THeader,
+      Confirm
     },
     methods: {
       addNote() {
-        this.pushNoteList(this._returnItem())
-        this.$router.push({
-          path: '/'
-        })
+        let title = this._trim(this.title)
+        let content = this._trim(this.content)
+        if (title && content) {
+          this.tip = '添加成功'
+          this.pushNoteList(this._returnItem())
+          this.$router.push({
+            path: '/'
+          })
+        } else {
+          this.$refs.confirm.show()
+        }
       },
       _returnItem() {
         return {
@@ -50,6 +61,9 @@
       },
       _completion(time) {
         return ('00' + time).substr((time + '').length)
+      },
+      _trim(str) {
+        return str.trim()
       },
       ...mapActions(['pushNoteList'])
     }

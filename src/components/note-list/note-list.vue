@@ -1,7 +1,7 @@
 <template>
   <div class="note-list">
     <ul>
-      <li @click="select(item)" class="list border-1px" v-for="item in list">
+      <li @click="select(index)" class="list border-1px" v-for="(item, index) in list">
         <p class="title">{{item.title}}</p>
         <div class="bottom">
           {{item.time}}
@@ -21,7 +21,6 @@
   export default {
     computed: {
       list() {
-        console.log(this.noteList)
         return this.noteList
       },
       ...mapGetters([
@@ -29,8 +28,8 @@
       ])
     },
     methods: {
-      select(item) {
-
+      select(index) {
+        this.$router.push(`/noteDetail/${index}`)
       }
     }
   }

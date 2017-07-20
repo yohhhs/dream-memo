@@ -1,14 +1,14 @@
 <template>
   <div class="header border-1px">
     <span class="header-item header-left">
-      <i class="iconfont icon-menu" v-if="!hasBack"></i>
+      <i class="iconfont icon-meiyoushuju" v-if="!hasBack"></i>
       <span v-else="hasBack" @click="close">
         <i class="iconfont icon-back"></i>
         {{titleTxt}}
       </span>
     </span>
     <span class="header-item header-text" v-show="!hasBack">{{titleTxt}}</span>
-    <span class="header-item header-right">
+    <span class="header-item header-right" v-show="!isDetail">
       <i class="iconfont icon-add" v-if="!hasBack" @click="add"></i>
       <span v-else="hasBack" @click="handler">{{editHandle}}</span>
     </span>
@@ -30,9 +30,9 @@
         type: String,
         default: '完成'
       },
-      note: {
-        type: Object,
-        default: null
+      isDetail: {
+        type: Boolean,
+        default: false
       }
     },
     methods: {

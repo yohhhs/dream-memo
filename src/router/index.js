@@ -6,6 +6,7 @@ const NoteEdit = (resolve) => {
     resolve(module)
   })
 }
+import noteDetail from 'components/noteDetail/noteDetail'
 
 Vue.use(Router)
 
@@ -14,6 +15,10 @@ export default new Router({
     {
       path: '/NoteEdit',
       component: NoteEdit
+    },
+    {
+      path: '/noteDetail/:index',
+      component: noteDetail
     }
   ]
 })
