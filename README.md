@@ -1,6 +1,6 @@
 # dream-memo
-
-> first Vue.js preject
+## 自己用的记事本
+> vue2.0+vuex+vue-router
 
 ## Build Setup
 
